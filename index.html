@@ -5,28 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeCraftWeb - Desenvolvimento Web Artesanal</title>
     <style>
-        /* Variáveis de cor - Modo Claro (padrão) */
+        /* Nova Paleta de Cores Suaves */
         :root {
-            --primary-bg: #F8F9FA;
-            --secondary-bg: #FFFFFF;
-            --text-primary: #212529;
-            --text-secondary: #495057;
-            --accent-color: #4361EE;
-            --header-footer: #2B2D42;
-            --card-shadow: rgba(0, 0, 0, 0.05);
-            --hover-color: #3A0CA3;
-            --active-color: #4CC9F0;
-            --text-light: #F8F9FA;
+            --primary-bg: #f8f5f2;  /* Bege claro - fundo principal */
+            --secondary-bg: #ffffff; /* Branco - fundo secundário */
+            --text-primary: #4a4a4a; /* Cinza escuro suave - texto principal */
+            --text-secondary: #6c757d; /* Cinza médio - texto secundário */
+            --accent-color: #6d8b74; /* Verde musgo suave - destaque */
+            --header-footer: #5d7161; /* Verde musgo mais escuro - cabeçalho/rodapé */
+            --card-shadow: rgba(0, 0, 0, 0.08); /* Sombra mais suave */
+            --hover-color: #556b5a;   /* Verde musgo mais escuro - hover */
+            --active-color: #a7c4bc;  /* Verde água claro - estados ativos */
+            --text-light: #f8f9fa;    /* Branco suave - texto claro */
+            --overlay: rgba(93, 113, 97, 0.85); /* Overlay mais suave */
         }
 
-        /* Variáveis de cor - Modo Escuro */
+        /* Modo Escuro Aconchegante */
         [data-theme="dark"] {
-            --primary-bg: #121212;
-            --secondary-bg: #1E1E1E;
-            --text-primary: #E1E1E1;
-            --text-secondary: #B0B0B0;
-            --header-footer: #0A0A0A;
-            --card-shadow: rgba(0, 0, 0, 0.3);
+            --primary-bg: #2a2e2b;    /* Cinza escuro - fundo principal */
+            --secondary-bg: #3a403c;  /* Cinza médio - fundo secundário */
+            --text-primary: #e8e6e3;  /* Branco quebrado - texto principal */
+            --text-secondary: #b8b8b8; /* Cinza claro - texto secundário */
+            --header-footer: #1e2320; /* Preto esverdeado - cabeçalho/rodapé */
+            --card-shadow: rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+            --hover-color: #a7c4bc;   /* Verde água claro - hover */
+            --active-color: #6d8b74;  /* Verde musgo - estados ativos */
         }
 
         /* Estilos Base */
@@ -34,7 +37,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
 
         body {
@@ -62,7 +65,8 @@
             font-size: 1.8rem;
             font-weight: 700;
             font-family: 'Courier New', monospace;
-            color: var(--accent-color);
+            color: var(--active-color);
+            letter-spacing: 1px;
         }
 
         /* Menu Desktop */
@@ -87,15 +91,15 @@
         }
 
         nav ul li a:hover {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
+            color: var(--active-color);
+            border-bottom-color: var(--active-color);
         }
 
         /* Menu Mobile e Toggle */
         .menu-container {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .menu-toggle {
@@ -103,28 +107,27 @@
             background: transparent;
             border: none;
             color: var(--text-light);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             padding: 0.5rem;
+            z-index: 1001;
         }
 
         .theme-toggle {
             background: transparent;
             border: none;
             color: var(--text-light);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             padding: 0.5rem;
             display: flex;
             align-items: center;
-        }
-
-        .theme-toggle i {
+            z-index: 1001;
             transition: transform 0.3s ease;
         }
 
-        [data-theme="dark"] .theme-toggle i {
-            transform: rotate(180deg);
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
@@ -135,15 +138,18 @@
             nav ul {
                 display: none;
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: 0;
                 right: 0;
+                bottom: 0;
                 background: var(--header-footer);
                 flex-direction: column;
-                padding: 1rem 0;
-                gap: 0;
+                padding: 6rem 1rem 1rem;
+                gap: 1.5rem;
                 z-index: 1000;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                align-items: center;
+                justify-content: flex-start;
             }
 
             nav ul.show {
@@ -160,13 +166,14 @@
                 width: 100%;
                 display: block;
                 padding: 1rem;
-                border-bottom: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 1.2rem;
             }
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(43, 45, 66, 0.8), rgba(43, 45, 66, 0.8)), url('coding-bg.jpg');
+            background: linear-gradient(var(--overlay), var(--overlay)), url('coding-bg.jpg');
             background-size: cover;
             background-position: center;
             color: white;
@@ -179,14 +186,16 @@
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            font-weight: 800;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1.3;
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 3rem;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .btn {
@@ -196,9 +205,9 @@
             padding: 1rem 2.5rem;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -207,7 +216,7 @@
         .btn:hover {
             background: var(--hover-color);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         /* Serviços */
@@ -224,6 +233,7 @@
             margin-bottom: 5rem;
             color: var(--text-primary);
             position: relative;
+            font-weight: 600;
         }
 
         .services h2:after {
@@ -233,22 +243,23 @@
             height: 4px;
             background: var(--accent-color);
             margin: 1rem auto 0;
+            border-radius: 2px;
         }
 
         .service-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .service-card {
             background: var(--secondary-bg);
-            padding: 2rem;
-            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
             box-shadow: 0 10px 30px var(--card-shadow);
-            border: 1px solid var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             transition: all 0.4s ease;
         }
 
@@ -262,6 +273,7 @@
             color: var(--text-primary);
             margin: 1.5rem 0;
             font-size: 1.4rem;
+            font-weight: 600;
         }
 
         .service-card p {
@@ -273,6 +285,14 @@
         .service-icon {
             font-size: 2.5rem;
             color: var(--accent-color);
+            background: rgba(109, 139, 116, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto;
         }
 
         /* Portfólio */
@@ -287,6 +307,7 @@
             margin-bottom: 5rem;
             color: var(--text-primary);
             position: relative;
+            font-weight: 600;
         }
 
         .portfolio h2:after {
@@ -296,6 +317,92 @@
             height: 4px;
             background: var(--accent-color);
             margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .portfolio-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-placeholder {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-placeholder p {
+            color: var(--text-secondary);
+        }
+
+        /* Sobre */
+        .about {
+            padding: 6rem 5%;
+            text-align: center;
+            background: var(--secondary-bg);
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .about p {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Contato */
+        .contact {
+            padding: 6rem 5%;
+            text-align: center;
+            background: var(--primary-bg);
+        }
+
+        .contact h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--text-secondary);
+            border-radius: 4px;
+            font-family: inherit;
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            height: 150px;
         }
 
         /* Rodapé */
@@ -324,10 +431,11 @@
             color: var(--text-light);
             text-decoration: none;
             transition: color 0.3s;
+            font-weight: 500;
         }
 
         .footer-links a:hover {
-            color: var(--accent-color);
+            color: var(--active-color);
         }
 
         .social-links {
@@ -336,24 +444,28 @@
 
         .social-links a {
             color: var(--text-light);
-            margin: 0 0.5rem;
+            margin: 0 0.75rem;
             font-size: 1.5rem;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
 
         .social-links a:hover {
-            color: var(--accent-color);
+            color: var(--active-color);
+            transform: translateY(-3px);
         }
 
         .copyright {
-            opacity: 0.7;
+            opacity: 0.8;
             font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         /* Responsividade */
         @media (max-width: 768px) {
             .hero {
                 padding: 6rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
             }
             
             .hero h1 {
@@ -364,12 +476,13 @@
                 font-size: 1rem;
             }
             
-            .services, .portfolio {
+            .services, .portfolio, .about, .contact {
                 padding: 4rem 5%;
             }
             
             .service-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
@@ -407,17 +520,23 @@
             <h2>Nossos Serviços</h2>
             <div class="service-grid">
                 <article class="service-card">
-                    <i class="fas fa-laptop-code service-icon"></i>
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
                     <h3>Desenvolvimento Customizado</h3>
                     <p>Sites construídos do zero, sob medida para sua marca, com código limpo e otimizado para performance.</p>
                 </article>
                 <article class="service-card">
-                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
                     <h3>Design Responsivo</h3>
                     <p>Experiências perfeitas em todos os dispositivos, desde smartphones até desktops de alta resolução.</p>
                 </article>
                 <article class="service-card">
-                    <i class="fas fa-rocket service-icon"></i>
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
                     <h3>Otimização SEO</h3>
                     <p>Sites estruturados para rankear bem nos mecanismos de busca desde o primeiro dia.</p>
                 </article>
@@ -426,42 +545,42 @@
         
         <section id="portfolio" class="portfolio">
             <h2>Nossos Projetos</h2>
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <p style="margin-bottom: 3rem; color: var(--text-secondary);">Aqui estão alguns dos nossos trabalhos artesanais mais recentes:</p>
-                <div style="background: var(--secondary-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px var(--card-shadow);">
-                    <p style="color: var(--text-secondary);">Projetos serão exibidos aqui em breve</p>
+            <div class="portfolio-content">
+                <p>Aqui estão alguns dos nossos trabalhos artesanais mais recentes:</p>
+                <div class="portfolio-placeholder">
+                    <p>Projetos serão exibidos aqui em breve</p>
                 </div>
             </div>
         </section>
         
-        <section id="sobre" style="padding: 6rem 5%; text-align: center; background: var(--secondary-bg);">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text-primary);">Sobre o CodeCraftWeb</h2>
-                <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
+        <section id="sobre" class="about">
+            <div class="about-container">
+                <h2>Sobre o CodeCraftWeb</h2>
+                <p>
                     Somos artesãos do digital. Enquanto outros usam templates prontos, nós esculpimos cada linha de código com cuidado artesanal. Nossa abordagem combina técnicas modernas com atenção aos detalhes que só o trabalho manual pode oferecer.
                 </p>
-                <p style="line-height: 1.8; color: var(--text-secondary);">
+                <p>
                     Acreditamos que um site não é apenas uma vitrine, mas uma extensão da essência do seu negócio. Por isso, cada projeto recebe o mesmo cuidado que um mestre artesão dedica à sua obra-prima.
                 </p>
             </div>
         </section>
         
-        <section id="contato" style="padding: 6rem 5%; text-align: center; background: var(--primary-bg);">
-            <h2 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text-primary);">Pronto para Craftar Seu Site?</h2>
-            <p style="max-width: 600px; margin: 0 auto 3rem; color: var(--text-secondary); line-height: 1.8;">
+        <section id="contato" class="contact">
+            <h2>Pronto para Craftar Seu Site?</h2>
+            <p>
                 Entre em contato para discutirmos como podemos transformar sua visão em realidade digital.
             </p>
-            <form style="max-width: 500px; margin: 0 auto;">
-                <div style="margin-bottom: 1.5rem;">
-                    <input type="text" placeholder="Seu nome" style="width: 100%; padding: 1rem; border: 1px solid var(--text-secondary); border-radius: 4px; font-family: inherit; background: var(--secondary-bg); color: var(--text-primary);">
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Seu nome" required>
                 </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <input type="email" placeholder="Seu e-mail" style="width: 100%; padding: 1rem; border: 1px solid var(--text-secondary); border-radius: 4px; font-family: inherit; background: var(--secondary-bg); color: var(--text-primary);">
+                <div class="form-group">
+                    <input type="email" placeholder="Seu e-mail" required>
                 </div>
-                <div style="margin-bottom: 1.5rem;">
-                    <textarea placeholder="Conte-nos sobre seu projeto" style="width: 100%; padding: 1rem; border: 1px solid var(--text-secondary); border-radius: 4px; height: 150px; font-family: inherit; background: var(--secondary-bg); color: var(--text-primary);"></textarea>
+                <div class="form-group">
+                    <textarea placeholder="Conte-nos sobre seu projeto" required></textarea>
                 </div>
-                <button type="submit" class="btn" style="border: none; font-family: inherit;">Enviar Mensagem</button>
+                <button type="submit" class="btn">Enviar Mensagem</button>
             </form>
         </section>
     </main>
@@ -475,82 +594,120 @@
             <a href="#contato">Contato</a>
         </div>
         <div class="social-links">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-behance"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
         </div>
         <p class="copyright">© <span id="year"></span> CodeCraftWeb. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        // Atualiza o ano automaticamente
-        document.getElementById('year').textContent = new Date().getFullYear();
-        
-        // Efeito smooth scroll para os links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualiza o ano automaticamente
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Efeito smooth scroll para os links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        
+                        // Fecha o menu mobile se estiver aberto
+                        if (navMenu.classList.contains('show')) {
+                            toggleMobileMenu();
+                        }
+                    }
                 });
             });
-        });
 
-        // Controle do Menu Mobile
-        const mobileMenuBtn = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
+            // Elementos do menu mobile
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = mobileMenuBtn.querySelector('i');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('show');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.classList.contains('show')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+            // Função para alternar o menu mobile
+            function toggleMobileMenu() {
+                navMenu.classList.toggle('show');
+                
+                // Alterna entre ícones de hambúrguer e X
+                if (navMenu.classList.contains('show')) {
+                    menuIcon.classList.replace('fa-bars', 'fa-times');
+                } else {
+                    menuIcon.classList.replace('fa-times', 'fa-bars');
+                }
             }
-        });
 
-        // Fechar menu ao clicar em um item
-        document.querySelectorAll('#nav-menu a').forEach(item => {
-            item.addEventListener('click', () => {
-                navMenu.classList.remove('show');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+            // Evento de clique no botão do menu
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMobileMenu();
             });
-        });
 
-        // Toggle de Tema
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        const themeIcon = themeToggle.querySelector('i');
+            // Fechar menu ao clicar fora
+            document.addEventListener('click', function(e) {
+                if (navMenu.classList.contains('show') && !e.target.closest('nav') && !e.target.closest('.menu-toggle')) {
+                    toggleMobileMenu();
+                }
+            });
 
-        // Verifica o tema salvo no localStorage ou preferência do sistema
-        const savedTheme = localStorage.getItem('theme') || 
-                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        
-        // Aplica o tema salvo
-        if (savedTheme === 'dark') {
-            html.setAttribute('data-theme', 'dark');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
+            // Toggle de Tema
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            const html = document.documentElement;
 
-        // Alternar tema
-        themeToggle.addEventListener('click', () => {
-            if (html.getAttribute('data-theme') {
-                html.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
+            // Verifica o tema salvo no localStorage ou preferência do sistema
+            function getPreferredTheme() {
+                const storedTheme = localStorage.getItem('theme');
+                if (storedTheme) {
+                    return storedTheme;
+                }
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            // Aplica o tema
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    html.setAttribute('data-theme', 'dark');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    html.removeAttribute('data-theme');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // Inicializa o tema
+            applyTheme(getPreferredTheme());
+
+            // Alternar tema
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                applyTheme(currentTheme ? 'light' : 'dark');
+            });
+
+            // Observa mudanças na preferência do sistema
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+
+            // Validação do formulário
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Aqui você pode adicionar a lógica de envio do formulário
+                    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                    this.reset();
+                });
             }
         });
     </script>
