@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Desenvolvimento web artesanal - CodeCraftWeb">
+    <title>CodeCraftWeb - Sites Feitos à Mão para Seu Negócio</title>
+    <style>
+        /* Reset e estilos básicos */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            line-height: 1.6; 
+            color: #333;
+            background-color: #fafafa;
+        }
+        
+        /* Cabeçalho */
+        header { 
+            background: #2b2d42; 
+            color: white; 
+            padding: 1.5rem 5%; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: #f8f32b;
+        }
+        
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 2rem; }
+        nav ul li a { 
+            color: white; 
+            text-decoration: none; 
+            transition: all 0.3s;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+        nav ul li a:hover { 
+            color: #f8f32b;
+            border-bottom-color: #f8f32b;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(43,45,66,0.8), rgba(43,45,66,0.8)), url('coding-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 1rem;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: -5rem;
+        }
+        
+        .hero h1 { 
+            font-size: 3rem; 
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        .hero p { 
+            font-size: 1.3rem; 
+            max-width: 800px; 
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            background: #f8f32b;
+            color: #2b2d42;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(248,243,43,0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { 
+            background: #ffff5e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(248,243,43,0.4);
+        }
+        
+        /* Serviços */
+        .services {
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background: white;
+        }
+        .services h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 5rem;
+            color: #2b2d42;
+            position: relative;
+        }
+        .services h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #f8f32b;
+            margin: 1rem auto 0;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: 1px solid #eee;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: #f8f32b;
+        }
+        .service-card h3 {
+            color: #2b2d42;
+            margin: 1.5rem 0;
+            font-size: 1.5rem;
+        }
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: #f8f32b;
+        }
+        
+        /* Portfólio */
+        .portfolio { 
+            padding: 6rem 5%; 
+            background: #f5f5f7; 
+            text-align: center;
+        }
+        .portfolio h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 5rem;
+            color: #2b2d42;
+            position: relative;
+        }
+        .portfolio h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #f8f32b;
+            margin: 1rem auto 0;
+        }
+        
+        /* Rodapé */
+        footer {
+            background: #2b2d42;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            position: relative;
+        }
+        footer .logo {
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #f8f32b;
+        }
+        .social-links {
+            margin: 2rem 0;
+        }
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #f8f32b;
+        }
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">CodeCraftWeb</div>
+        <nav>
+            <ul>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h1>Artesanato Digital para Seu Negócio</h1>
+            <p>Cada site é meticulosamente codificado à mão para atender às necessidades únicas do seu negócio. Nada de templates genéricos - apenas código limpo e soluções personalizadas.</p>
+            <a href="#contato" class="btn">Comece Seu Projeto</a>
+        </section>
+        
+        <section id="servicos" class="services">
+            <h2>Nossos Serviços</h2>
+            <div class="service-grid">
+                <article class="service-card">
+                    <i class="fas fa-laptop-code service-icon"></i>
+                    <h3>Desenvolvimento Customizado</h3>
+                    <p>Sites construídos do zero, sob medida para sua marca, com código limpo e otimizado para performance.</p>
+                </article>
+                <article class="service-card">
+                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <h3>Design Responsivo</h3>
+                    <p>Experiências perfeitas em todos os dispositivos, desde smartphones até desktops de alta resolução.</p>
+                </article>
+                <article class="service-card">
+                    <i class="fas fa-rocket service-icon"></i>
+                    <h3>Otimização SEO</h3>
+                    <p>Sites estruturados para rankear bem nos mecanismos de busca desde o primeiro dia.</p>
+                </article>
+            </div>
+        </section>
+        
+        <section id="portfolio" class="portfolio">
+            <h2>Nossos Projetos</h2>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <p style="margin-bottom: 3rem;">Aqui estão alguns dos nossos trabalhos artesanais mais recentes:</p>
+                <!-- Espaço para portfólio -->
+                <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <p>Projetos serão exibidos aqui em breve</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sobre" style="padding: 6rem 5%; text-align: center; background: white;">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 2rem; color: #2b2d42;">Sobre o CodeCraftWeb</h2>
+                <p style="line-height: 1.8; color: #666; margin-bottom: 2rem;">
+                    Somos artesãos do digital. Enquanto outros usam templates prontos, nós esculpimos cada linha de código com cuidado artesanal. Nossa abordagem combina técnicas modernas com atenção aos detalhes que só o trabalho manual pode oferecer.
+                </p>
+                <p style="line-height: 1.8; color: #666;">
+                    Acreditamos que um site não é apenas uma vitrine, mas uma extensão da essência do seu negócio. Por isso, cada projeto recebe o mesmo cuidado que um mestre artesão dedica à sua obra-prima.
+                </p>
+            </div>
+        </section>
+        
+        <section id="contato" style="padding: 6rem 5%; text-align: center; background: #f8f9fa;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 2rem; color: #2b2d42;">Pronto para Craftar Seu Site?</h2>
+            <p style="max-width: 600px; margin: 0 auto 3rem; color: #666; line-height: 1.8;">
+                Entre em contato para discutirmos como podemos transformar sua visão em realidade digital.
+            </p>
+            <form style="max-width: 500px; margin: 0 auto;">
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="text" placeholder="Seu nome" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="email" placeholder="Seu e-mail" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <textarea placeholder="Conte-nos sobre seu projeto" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; height: 150px; font-family: inherit;"></textarea>
+                </div>
+                <button type="submit" class="btn" style="border: none; font-family: inherit;">Enviar Mensagem</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="logo">CodeCraftWeb</div>
+        <div class="footer-links">
+            <a href="#servicos">Serviços</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-behance"></i></a>
+        </div>
+        <p class="copyright">© <span id="year"></span> CodeCraftWeb. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Atualiza o ano automaticamente
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Efeito smooth scroll para os links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
