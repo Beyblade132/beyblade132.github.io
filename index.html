@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeCraftWeb - Desenvolvimento Web Artesanal</title>
     <style>
-        /* Variáveis de cor */
+        /* Variáveis de cor - Modo Claro (padrão) */
         :root {
-            /* Light Mode Default */
             --primary-bg: #F8F9FA;
             --secondary-bg: #FFFFFF;
             --text-primary: #212529;
@@ -20,45 +19,14 @@
             --text-light: #F8F9FA;
         }
 
-        /* Dark Mode - Preferência do Sistema */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary-bg: #121212;
-                --secondary-bg: #1E1E1E;
-                --text-primary: #E0E0E0;
-                --text-secondary: #B0B0B0;
-                --accent-color: #BB86FC;
-                --header-footer: #1A1A2E;
-                --card-shadow: rgba(0, 0, 0, 0.2);
-                --hover-color: #9D4EDD;
-                --active-color: #03DAC6;
-            }
-        }
-
-        /* Dark Mode - Manual */
+        /* Variáveis de cor - Modo Escuro */
         [data-theme="dark"] {
             --primary-bg: #121212;
             --secondary-bg: #1E1E1E;
-            --text-primary: #E0E0E0;
+            --text-primary: #E1E1E1;
             --text-secondary: #B0B0B0;
-            --accent-color: #BB86FC;
-            --header-footer: #1A1A2E;
-            --card-shadow: rgba(0, 0, 0, 0.2);
-            --hover-color: #9D4EDD;
-            --active-color: #03DAC6;
-        }
-
-        /* Light Mode - Manual */
-        [data-theme="light"] {
-            --primary-bg: #F8F9FA;
-            --secondary-bg: #FFFFFF;
-            --text-primary: #212529;
-            --text-secondary: #495057;
-            --accent-color: #4361EE;
-            --header-footer: #2B2D42;
-            --card-shadow: rgba(0, 0, 0, 0.05);
-            --hover-color: #3A0CA3;
-            --active-color: #4CC9F0;
+            --header-footer: #0A0A0A;
+            --card-shadow: rgba(0, 0, 0, 0.3);
         }
 
         /* Estilos Base */
@@ -80,13 +48,13 @@
         header {
             background-color: var(--header-footer);
             color: var(--text-light);
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -97,6 +65,7 @@
             color: var(--accent-color);
         }
 
+        /* Menu Desktop */
         nav ul {
             display: flex;
             list-style: none;
@@ -122,67 +91,77 @@
             border-bottom-color: var(--accent-color);
         }
 
-        /* Botão de Tema */
-        .theme-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
+        /* Menu Mobile e Toggle */
+        .menu-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
             color: var(--text-light);
-            font-family: inherit;
-            font-size: 1rem;
-            padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
         }
 
-        .theme-btn:hover {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
         }
 
-        .theme-icon {
-            position: relative;
-            display: inline-block;
-            width: 20px;
-            height: 20px;
+        .theme-toggle i {
+            transition: transform 0.3s ease;
         }
 
-        .theme-icon i {
-            position: absolute;
-            transition: all 0.3s ease;
+        [data-theme="dark"] .theme-toggle i {
+            transform: rotate(180deg);
         }
 
-        .fa-sun {
-            opacity: 1;
-            transform: rotate(0deg);
-            color: #FFD700;
-        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
 
-        .fa-moon {
-            opacity: 0;
-            transform: rotate(-90deg);
-            color: #BB86FC;
-        }
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--header-footer);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+                z-index: 1000;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
 
-        [data-theme="dark"] .fa-sun {
-            opacity: 0;
-            transform: rotate(90deg);
-        }
+            nav ul.show {
+                display: flex;
+            }
 
-        [data-theme="dark"] .fa-moon {
-            opacity: 1;
-            transform: rotate(0deg);
-        }
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                padding: 0;
+            }
 
-        .theme-text::after {
-            content: "Claro";
-        }
-
-        [data-theme="dark"] .theme-text::after {
-            content: "Escuro";
+            nav ul li a {
+                width: 100%;
+                display: block;
+                padding: 1rem;
+                border-bottom: none;
+            }
         }
 
         /* Hero Section */
@@ -198,13 +177,13 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
             font-weight: 800;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 3rem;
             opacity: 0.9;
@@ -241,7 +220,7 @@
         }
 
         .services h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 5rem;
             color: var(--text-primary);
             position: relative;
@@ -258,15 +237,15 @@
 
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .service-card {
             background: var(--secondary-bg);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 10px 30px var(--card-shadow);
             border: 1px solid var(--card-shadow);
@@ -282,16 +261,17 @@
         .service-card h3 {
             color: var(--text-primary);
             margin: 1.5rem 0;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
         .service-card p {
             color: var(--text-secondary);
             line-height: 1.8;
+            font-size: 1rem;
         }
 
         .service-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--accent-color);
         }
 
@@ -303,7 +283,7 @@
         }
 
         .portfolio h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 5rem;
             color: var(--text-primary);
             position: relative;
@@ -337,6 +317,7 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -368,27 +349,49 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 6rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .services, .portfolio {
+                padding: 4rem 5%;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="logo">CodeCraftWeb</div>
+        <div class="menu-container">
+            <button class="theme-toggle" aria-label="Alternar tema" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="menu-toggle" aria-label="Menu" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
         <nav>
-            <ul>
+            <ul id="nav-menu">
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#portfolio">Portfólio</a></li>
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#contato">Contato</a></li>
-                <li>
-                    <button id="theme-toggle" class="theme-btn" aria-label="Alternar tema">
-                        <span class="theme-icon">
-                            <i class="fas fa-sun"></i>
-                            <i class="fas fa-moon"></i>
-                        </span>
-                        <span class="theme-text">Modo</span>
-                    </button>
-                </li>
             </ul>
         </nav>
     </header>
@@ -433,7 +436,7 @@
         
         <section id="sobre" style="padding: 6rem 5%; text-align: center; background: var(--secondary-bg);">
             <div style="max-width: 800px; margin: 0 auto;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-primary);">Sobre o CodeCraftWeb</h2>
+                <h2 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text-primary);">Sobre o CodeCraftWeb</h2>
                 <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
                     Somos artesãos do digital. Enquanto outros usam templates prontos, nós esculpimos cada linha de código com cuidado artesanal. Nossa abordagem combina técnicas modernas com atenção aos detalhes que só o trabalho manual pode oferecer.
                 </p>
@@ -444,7 +447,7 @@
         </section>
         
         <section id="contato" style="padding: 6rem 5%; text-align: center; background: var(--primary-bg);">
-            <h2 style="font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-primary);">Pronto para Craftar Seu Site?</h2>
+            <h2 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text-primary);">Pronto para Craftar Seu Site?</h2>
             <p style="max-width: 600px; margin: 0 auto 3rem; color: var(--text-secondary); line-height: 1.8;">
                 Entre em contato para discutirmos como podemos transformar sua visão em realidade digital.
             </p>
@@ -494,38 +497,62 @@
             });
         });
 
-        // Controle do Tema
-        const themeToggle = document.getElementById('theme-toggle');
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        // Controle do Menu Mobile
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
 
-        // Verifica o tema salvo ou preferência do sistema
-        function setInitialTheme() {
-            const currentTheme = localStorage.getItem('theme');
-            if (currentTheme) {
-                document.documentElement.setAttribute('data-theme', currentTheme);
-            } else if (prefersDarkScheme.matches) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        }
-
-        // Alternância manual do tema
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Event Listeners
-        themeToggle.addEventListener('click', toggleTheme);
-        prefersDarkScheme.addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
 
-        // Inicializa
-        setInitialTheme();
+        // Fechar menu ao clicar em um item
+        document.querySelectorAll('#nav-menu a').forEach(item => {
+            item.addEventListener('click', () => {
+                navMenu.classList.remove('show');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Toggle de Tema
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Verifica o tema salvo no localStorage ou preferência do sistema
+        const savedTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Aplica o tema salvo
+        if (savedTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // Alternar tema
+        themeToggle.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
     </script>
 </body>
 </html>
